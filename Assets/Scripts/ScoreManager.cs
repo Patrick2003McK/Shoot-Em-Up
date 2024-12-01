@@ -1,17 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    public int score { get; private set; }
+    public Text scoreText;
+    private int score;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Preserve across scenes
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -22,6 +24,19 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int points)
     {
         score += points;
-        Debug.Log($"Score: {score}"); // For debugging; replace this with UI updates
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
+
+        else
+        {
+            Debug.LogWarning("Score Text is not assigned in the Inspector.");
+        }
     }
 }
