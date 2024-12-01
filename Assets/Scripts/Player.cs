@@ -9,8 +9,21 @@ public class Player : MonoBehaviour
     // Player's movement speed
     public float speed = 5.0f;
 
-    // Tracks whether a laser is currently active (to avoid multiple shots at once)
-    private bool _laserActive;
+    // Fire rate in shots per second
+    public float fireRate = 5.0f;
+    private float _nextFireTime = 0f;
+
+    // Screen boundaries
+    private float _screenLeft;
+    private float _screenRight;
+
+    private void Start()
+    {
+        // Calculate screen boundaries in world coordinates
+        float screenDistance = Camera.main.transform.position.z; // Camera is assumed to be orthographic
+        _screenLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, -screenDistance)).x;
+        _screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, -screenDistance)).x;
+    }
 
     private void Update()
     {
@@ -24,28 +37,37 @@ public class Player : MonoBehaviour
             this.transform.position += Vector3.right * this.speed * Time.deltaTime;
         }
 
+        // Wrap player position at screen edges
+        WrapPosition();
+
         // Handle shooting
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFireTime)
         {
             Shoot();
+            _nextFireTime = Time.time + 1f / fireRate; // Set the next fire time based on the fire rate
         }
+    }
+
+    private void WrapPosition()
+    {
+        Vector3 position = this.transform.position;
+
+        if (position.x < _screenLeft)
+        {
+            position.x = _screenRight;
+        }
+        else if (position.x > _screenRight)
+        {
+            position.x = _screenLeft;
+        }
+
+        this.transform.position = position;
     }
 
     private void Shoot()
     {
-        if (!_laserActive)
-        {
-            // Instantiate a laser and attach its destruction callback
-            Projectile projectile = Instantiate(this.laserPreFab, this.transform.position, Quaternion.identity);
-            projectile.destroyed += LaserDestroyed;
-            _laserActive = true;
-        }
-    }
-
-    private void LaserDestroyed()
-    {
-        // Reset laser activity when the laser is destroyed
-        _laserActive = false;
+        // Instantiate a laser
+        Instantiate(this.laserPreFab, this.transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
