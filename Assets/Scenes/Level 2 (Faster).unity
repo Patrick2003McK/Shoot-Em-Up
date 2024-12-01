@@ -2044,10 +2044,11 @@ MonoBehaviour:
   prefabs:
   - {fileID: 8917962859421386726, guid: 3c5da1c83cd106c46928b2a8a3b901d8, type: 3}
   - {fileID: 8917962859421386726, guid: 3c5da1c83cd106c46928b2a8a3b901d8, type: 3}
+  - {fileID: 8917962859421386726, guid: 3c5da1c83cd106c46928b2a8a3b901d8, type: 3}
   - {fileID: 8486290959013208859, guid: 9d7778ad11956f24a92fdd780591575a, type: 3}
   - {fileID: 8486290959013208859, guid: 9d7778ad11956f24a92fdd780591575a, type: 3}
   - {fileID: 778200622680081008, guid: 49ae23744d67ff144afe852117721322, type: 3}
-  rows: 5
+  rows: 6
   columns: 11
   speed:
     serializedVersion: 2
@@ -2063,7 +2064,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 8
+      value: 15
       inSlope: 25.67592
       outSlope: 25.67592
       tangentMode: 0
