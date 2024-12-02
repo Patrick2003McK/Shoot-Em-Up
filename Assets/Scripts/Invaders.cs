@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Invaders : MonoBehaviour
 {
-    // Prefabs for invader rows, organized by type
+    // Prefabs for invader rows
     public Invader[] prefabs;
 
     // Number of rows and columns of invaders
@@ -16,7 +16,7 @@ public class Invaders : MonoBehaviour
     // Prefab for missiles fired by the invaders
     public Projectile missilePrefab;
 
-    // Time interval between missile attacks
+    // Time between missile attacks
     public float MissileAttackRate = 1.0f;
 
     // Number of invaders killed
@@ -80,7 +80,7 @@ public class Invaders : MonoBehaviour
             if (!invader.gameObject.activeInHierarchy)
                 continue;
 
-            // Change direction if invaders hit the screen edge
+            // Change direction when invaders hit the screen edge
             if (_direction == Vector3.right && invader.position.x >= (rightEdge.x - 1.0f))
                 AdvanceRow();
             else if (_direction == Vector3.left && invader.position.x <= (leftEdge.x + 1.0f))

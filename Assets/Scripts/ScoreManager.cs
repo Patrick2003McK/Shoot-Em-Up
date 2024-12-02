@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
     // Singleton instance for global access
     public static ScoreManager Instance;
 
-    // UI element to display the score
+    // UI text element to display the score
     public Text scoreText;
 
     // Tracks the player's score
@@ -18,11 +18,11 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist through scene changes
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances
+            Destroy(gameObject);
         }
     }
 

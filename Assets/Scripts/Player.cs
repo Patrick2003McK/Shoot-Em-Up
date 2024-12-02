@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         // Calculate screen boundaries in world coordinates
-        float screenDistance = Camera.main.transform.position.z; // Camera is assumed to be orthographic
+        float screenDistance = Camera.main.transform.position.z;
         _screenLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, -screenDistance)).x;
         _screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, -screenDistance)).x;
     }
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFireTime)
         {
             Shoot();
-            _nextFireTime = Time.time + 1f / fireRate; // Set the next fire time based on the fire rate
+            _nextFireTime = Time.time + 1f / fireRate;
         }
     }
 

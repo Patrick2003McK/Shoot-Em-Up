@@ -8,7 +8,7 @@ public class Invader : MonoBehaviour
     // Time interval between animation frames
     public float animationTime = 1.0f;
 
-    // Action to be invoked when the invader is killed (used for event-driven updates)
+    // Action to be invoked when the invader is killed
     public System.Action killed;
 
     // Reference to the SpriteRenderer component
@@ -51,13 +51,13 @@ public class Invader : MonoBehaviour
         // Check if the collision is with a laser (by layer)
         if (other.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
-            // Invoke the killed action (e.g., notify the parent that this invader is destroyed)
+            // Invoke the killed action
             this.killed.Invoke();
 
             // Add points to the player's score
             ScoreManager.Instance.AddScore(50);
 
-            // Deactivate this invader (simulate destruction)
+            // Deactivate this invader
             this.gameObject.SetActive(false);
         }
     }
